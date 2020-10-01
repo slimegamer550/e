@@ -55,5 +55,22 @@
       </div>
     </div>
 
+    <button onClick="avaa_paikkatietolomake();" type="button" class="btn btn-secondary oma_nappi">Tallenna sijainti</button>
+
+    <div id="paikkatietolomake">
+      <form id="lomake">
+        <div class="form-group">
+          <laber for="paikka">Paikka:</label>
+            <input type="text" class="form-control" id="paikka">
+        </div>
+        <div class="form-group">
+          <label for="arvostelu">Arvostelu: </label>
+          <input type="text" class="form-control" id="arvostelu">
+        </div>
+        <button onclick="laheta_arvostelu();" type="button" class="btn btn-secondary oma_nappi">Lähetä</button>
+        <button onclick="sulje_paikkatietolomake();" type="button" class="btn btn-secondary oma_nappi">Peruuta</button>
+      </form>
+    </div>
+
   </body>
 </html>

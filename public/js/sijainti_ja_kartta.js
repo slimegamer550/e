@@ -22,8 +22,26 @@ if ("geolocation" in navigator) {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
     }).addTo(kartta);
 
+    var marker = L.marker([latitude, longitude]).addTo(kartta);
   });
 
 } else {
   console.log("Sijantitieto ei saatavilla");
+}
+
+function avaa_paikkatietolomake() {
+  document.getElementById("paikkatietolomake").style.display = "block";
+  document.getElementById("lomake").reset();
+}
+
+function sulje_paikkatietolomake() {
+  document.getElementById("paikkatietolomake").style.display = "none";
+}
+
+function laheta_arvostelu() {
+  var paikka = document.getElementById("paikka").value;
+  var arvostelu = document.getElementById("arvostelu").value;
+
+  console.log("Paikka: " + paikka);
+  console.log("Arvostelu: " + arvostelu);
 }
