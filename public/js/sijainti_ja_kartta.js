@@ -2,6 +2,12 @@ var latitude = 0;
 var longitude = 0;
 var kartta;
 
+async function getData() {
+  const response = await fetch('/api/paikat');
+  const data = await response.json();
+  console.log("Function getdatan tiedot: ", data)
+}
+
 if ("geolocation" in navigator) {
   console.log("Sijaintitieto saatavilla");
   navigator.geolocation.getCurrentPosition(function(position) {
@@ -23,6 +29,7 @@ if ("geolocation" in navigator) {
     }).addTo(kartta);
 
     var marker = L.marker([latitude, longitude]).addTo(kartta);
+    getData();
   });
 
 } else {
