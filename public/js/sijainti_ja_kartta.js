@@ -2,10 +2,43 @@ var latitude = 0;
 var longitude = 0;
 var kartta;
 
+var olet_tassa;
+var paikka_merkitty = 0;
+
 async function getData() {
   const response = await fetch('/api/paikat');
   const data = await response.json();
   console.log("Function getdatan tiedot: ", data)
+
+ merkitsePaikat(data);
+ tayta_paikkataulukko(data);
+}
+
+function tayta_paikkataulukko(data) {
+  var table = document.getElementById("paikkataulukko");
+
+  for (var i = 0; i < data.length; i++) {
+    var row = table.insertRow(i + 1)
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+
+    cell1.innerHTML = data[i].paikka;
+    cell2.innerHTML = data[i].arvostelu;
+  }
+  console.log("Taulukon tiedot: ", table)
+}
+
+function merkitsePaikat(data) {
+  var kayty_paikka;
+  for (var i = 0; i < data.length; i++) {
+    kayty_paikka = L.marker([data[i].latitude, data[i].longitude]).addTo(kartta);
+    kayty_paikka.bindPopup("<b>" + data[i].paikka + "</b><br>" + data[i].arvostelu).openPopup();
+  }
+
+  if (paikka_merkitty == 0) {
+    olet_tassa = L.marker([latitude, longitude]).addTo(kartta);
+    olet_tassa.bindPopup("<b> Olet tässä </b><br>" + "haluatko merkitä paikan").openPopup();
+  }
 }
 
 if ("geolocation" in navigator) {
